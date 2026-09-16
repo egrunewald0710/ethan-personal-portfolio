@@ -310,3 +310,31 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
 console.log(
     "Ethan Grunewald Portfolio — 2026"
 );
+
+/* =========================================
+   CERTIFICATION REVEALS
+========================================= */
+
+gsap.utils.toArray(".certification-card").forEach((certification, index) => {
+
+    gsap.to(certification, {
+
+        scrollTrigger: {
+            trigger: certification,
+            start: "top 85%",
+
+            toggleActions: "play none none none"
+        },
+
+        y: 0,
+        opacity: 1,
+
+        duration: 1,
+
+        delay: index * 0.15,
+
+        ease: "power3.out"
+
+    });
+
+});
