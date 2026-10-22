@@ -253,6 +253,91 @@ body {
     position: relative;
 
     z-index: 2;
+
+    display: grid;
+
+    grid-template-columns: minmax(0, 1fr) minmax(300px, 0.46fr);
+
+    align-items: center;
+
+    column-gap: clamp(35px, 5vw, 80px);
+}
+
+.hero-content > .eyebrow,
+.hero-title,
+.hero-bottom {
+    grid-column: 1;
+}
+
+.hero-portrait {
+    grid-column: 2;
+
+    grid-row: 1 / span 3;
+
+    position: relative;
+
+    width: 100%;
+
+    height: clamp(400px, 62vh, 570px);
+
+    overflow: hidden;
+
+    border: 1px solid rgba(183, 255, 74, 0.35);
+
+    border-radius: 48% 48% 18px 18px;
+
+    background: #171717;
+
+    box-shadow: 0 25px 90px rgba(183, 255, 74, 0.08);
+}
+
+.hero-portrait::after {
+    position: absolute;
+
+    inset: 0;
+
+    background: linear-gradient(
+        180deg,
+        transparent 55%,
+        rgba(10, 10, 10, 0.45)
+    );
+
+    content: "";
+
+    pointer-events: none;
+}
+
+.hero-portrait img {
+    width: 100%;
+
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    object-position: center 38%;
+
+    filter: grayscale(100%);
+
+    animation: hero-photo-drift 9s ease-in-out infinite;
+
+    transition: filter 0.5s ease;
+}
+
+.hero-portrait:hover img {
+    filter: grayscale(25%);
+}
+
+@keyframes hero-photo-drift {
+    0%,
+    100% {
+        transform: scale(1.02);
+    }
+
+    50% {
+        transform: scale(1.07) translateY(-0.5%);
+    }
 }
 
 .eyebrow {
@@ -266,13 +351,15 @@ body {
 }
 
 .hero-title {
-    max-width: 1100px;
+    max-width: 100%;
+
+    min-width: 0;
 
     margin-top: 30px;
 
     font-family: "Space Grotesk", sans-serif;
 
-    font-size: clamp(70px, 10vw, 150px);
+    font-size: clamp(70px, 7.2vw, 110px);
 
     line-height: 0.9;
 
@@ -373,6 +460,18 @@ body {
     height: 1px;
 
     background: #555;
+}
+
+@media (max-width: 1100px) and (min-width: 901px) {
+    .hero-content {
+        grid-template-columns: minmax(0, 1fr) minmax(230px, 0.42fr);
+
+        column-gap: 28px;
+    }
+
+    .hero-title {
+        font-size: clamp(62px, 7.8vw, 86px);
+    }
 }
 
 
@@ -584,15 +683,13 @@ body {
 }
 
 .project-image {
-    height: 285px;
-
-    overflow: hidden;
+    align-self: start;
 }
 
 .project-placeholder {
     width: 100%;
 
-    height: 100%;
+    height: auto;
 
     display: flex;
 
@@ -610,21 +707,20 @@ body {
 
     font-weight: 600;
 
-    transition: transform 0.6s ease;
 }
 
 .project-placeholder img {
     width: 100%;
 
-    height: 100%;
+    height: auto;
+
+    display: block;
 
     object-fit: contain;
-
-    object-position: center;
 }
 
-.project:hover .project-placeholder {
-    transform: scale(1.04);
+.project-placeholder.project-photo {
+    background: transparent;
 }
 
 .project-placeholder span {
@@ -681,11 +777,7 @@ body {
 }
 
 .letsmove {
-    background: #f5f7fb;
-}
-
-.letsmove img {
-    transform: scale(1.8);
+    background: transparent;
 }
 
 .project-info {
@@ -1444,8 +1536,32 @@ body {
         padding: 140px 25px 60px;
     }
 
+    .hero-content {
+        display: block;
+    }
+
+    .hero-portrait {
+        position: absolute;
+
+        top: 50%;
+
+        right: 0;
+
+        width: 210px;
+
+        height: 290px;
+
+        margin-top: -145px;
+
+        opacity: 0.35;
+
+        z-index: -1;
+    }
+
     .hero-title {
-        font-size: clamp(65px, 18vw, 110px);
+        max-width: calc(100% - 145px);
+
+        font-size: clamp(46px, 9vw, 82px);
     }
 
     .hero-bottom {
@@ -1512,8 +1628,6 @@ body {
     }
 
     .project-image {
-        height: 400px;
-
         order: 2;
     }
 
@@ -1609,8 +1723,28 @@ body {
 
     /* HERO */
 
+    .hero-portrait {
+        position: relative;
+
+        top: auto;
+
+        right: auto;
+
+        width: min(58vw, 210px);
+
+        height: 250px;
+
+        margin: 35px 0 0 auto;
+
+        opacity: 1;
+
+        z-index: 0;
+    }
+
     .hero-title {
-        font-size: 64px;
+        max-width: 100%;
+
+        font-size: clamp(44px, 12vw, 58px);
     }
 
     .hero-description {
@@ -1686,7 +1820,7 @@ body {
     /* PROJECTS */
 
     .project-image {
-        height: 300px;
+        height: auto;
     }
 
     .project-info h3 {
@@ -1708,5 +1842,11 @@ body {
         flex-direction: column;
 
         gap: 15px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero-portrait img {
+        animation: none;
     }
 }

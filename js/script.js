@@ -33,6 +33,14 @@ heroTimeline
         ease: "power4.out"
     }, "-=0.4")
 
+    .from(".hero-portrait", {
+        x: 50,
+        opacity: 0,
+        scale: 0.96,
+        duration: 1.1,
+        ease: "power3.out"
+    }, "-=0.8")
+
     .from(".hero-description", {
         y: 30,
         opacity: 0,
