@@ -436,7 +436,7 @@ body {
 }
 
 .about-image {
-    height: 650px;
+    height: 550px;
 }
 
 .image-placeholder {
@@ -584,7 +584,7 @@ body {
 }
 
 .project-image {
-    height: 350px;
+    height: 285px;
 
     overflow: hidden;
 }
@@ -678,6 +678,14 @@ body {
 
 .pink {
     background: white;
+}
+
+.letsmove {
+    background: #f5f7fb;
+}
+
+.letsmove img {
+    transform: scale(1.8);
 }
 
 .project-info {
